@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.GoodsMapper" >
+
+<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="com.shop.pojo.Goods">
+		<result column="product_id" property="productid" />
+		<result column="product_number" property="productnumber" />
+		<result column="name" property="name" />
+		<result column="show_price" property="showprice" />
+		<result column="introduce" property="introduce" />
+		<result column="pic_img" property="picimg" />
+		<result column="page_title" property="pagetitle" />
+		<result column="page_description" property="pagedescription" />
+	</resultMap>
+	
+	<select id="getGoodById" resultMap="BaseResultMap" parameterType="Object" >
+		select * from shop.os_product where product_id=#{productid}
+	</select>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Object" >
+		select * from shop.os_product
+	</select>
+	
+	<select id="getGoodByName" resultMap="BaseResultMap" parameterType="Object" >
+		select * from shop.os_product where name like CONCAT('%', #{name}, '%')
+	</select>
+	
+	<delete id="delete" parameterType="Object">
+		delete from shop.os_product where product_id=#{productid}
+	</delete>
+	
+	<update id="update" parameterType="Object">
+		update shop.os_product set name=#{name},show_price=#{showprice},page_title=#{pagetitle},page_description=#{pagedescription},pic_img=#{picimg},introduce=#{introduce} where product_id=#{productid}
+	</update>
+	
+	<insert id="insert" parameterType="Object">
+		insert into shop.os_product(product_number,name,show_price,introduce,pic_img,page_title,page_description) values(#{productnumber},#{name},#{showprice},#{introduce},#{picimg},#{pagetitle},#{pagedescription})
+	</insert>
+	
+</mapper>

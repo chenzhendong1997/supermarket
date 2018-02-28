@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shop.dao.UserMapper" >
+
+<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="com.shop.pojo.User">
+		<result column="user_name" property="userName" />
+		<result column="pass_word" property="passWord" />
+		<result column="cellphone" property="cellphone" />
+	</resultMap>
+
+	<insert id="insert"  parameterType="Object">
+		insert into user(user_name,pass_word,cellphone) values(#{userName},#{passWord},#{cellphone})
+	</insert>
+	
+	<update id="update"  parameterType="Object">
+		update user set pass_word=#{passWord},cellphone=#{cellphone} where user_name=#{userName}
+	</update>
+	
+	<delete id="delete"  parameterType="Object">
+		delete from user where user_name=#{userName}
+	</delete>
+	
+	<select id="getAll" resultMap="BaseResultMap" parameterType="Object" >
+		select * from user
+	</select>
+	
+	<select id="findUser" resultMap="BaseResultMap" parameterType="Object" >
+		select * from user where user_name=#{userName} and pass_word=#{passWord}
+	</select>
+	
+	<select id="getUserByName" resultMap="BaseResultMap" parameterType="Object" >
+		select * from user where user_name like #{userName}
+	</select>
+	
+</mapper>
